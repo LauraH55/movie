@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annuaire Films{% endblock %}
+
+{% block stylesheets %}
+  <style>
+
+    .card img{
+      width: 250px;
+
+    }
+
+    .card-title{
+      color: #4C7493;
+      font-style: oblique;
+      font-weight: bold;
+    }
+
+    body{
+      background-color: #147589;
+    }
+
+
+  </style>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+  <div class="example-wrapper text-center text-light font-italic">
+      <h1>Liste des films </h1>
+  </div>
+</div>
+<div class="container">
+
+  {% for movie in movies %}
+      <div class="card-deck mb-4">
+        <div class="card">
+          <div class="row">
+            <div class="col md-6 text-center mt-5">
+              <img src="{{ movie.cover }}" class="card-img-top" alt="Affiche du film">
+              <div class="date">
+                Date de sortie : <span style="font-weight:bold">{{ movie.date.format('d-m-Y') }}</span>
+              </div>
+              <div class="category">
+                Genres : {% for category in movie.category %}
+                  <span style="font-weight:bold">{{ category.name }}</span>
+                {% endfor %}
+              </div>
+              <div class="realisateur">
+                De : <span style="font-weight:bold">{{ movie.author.name }}</span>
+              </div>
+              <div class="link">
+                <a class="btn btn-info mb-3 mt-1" href="{{ movie.link }}">Lien Allociné</a>
+              </div>
+            </div>
+              <div class="col md-6 d-flex justify-content-center- align-items-center">
+                <div class="card-body">
+                  <h5 class="card-title">{{ movie.name }}</h5>
+                  <p class="card-text">{{ movie.description }}</p>
+                  <p class="card-text"><span style="font-weight:bold">Note :</span> {{ movie.reviews }} / 5</p>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+  {% endfor %}
+
+
+</div>
+{% endblock %}
