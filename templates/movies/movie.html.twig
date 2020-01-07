@@ -12,10 +12,15 @@
     <p class="lead">{{ movie.description }}</p>
     <hr class="my-4">
       De : <a href="{{ path('author', { id: movie.author.id }) }}" style="font-weight:bold">{{ movie.author.name }}</a>
-      <div class="realisateur">
-        Du même réalisateur : <br>{% for movieAuthor in movie.author.movies %}
-        <span style="font-weight:bold">{{movieAuthor.name}}</span><br>
-        {% endfor %}
+      <div style="font-weight:bold" class="realisateur">
+        Du même réalisateur : <br>
+    </div>
+    <div class="row">
+      {% for movieAuthor in movie.author.movies %}
+      <div class="col-md-3 mt-4">
+        <span style="font-weight:bold"> <img src="{{movieAuthor.cover}}" alt="couverture films" width=100% > </span><br>
+      </div>
+      {% endfor %}
     </div>
     <p class="lead mt-3 mb-1">
       <a class="btn btn-info btn-lg mb-3 mb-1" href="{{ movie.link }}">Lien Allociné</a>
