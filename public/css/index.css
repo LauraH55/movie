@@ -12,3 +12,17 @@ body {
   font-style: oblique;
   font-weight: bold;
 }
+
+.page-header{
+  color: white;
+
+}
+
+.titlelink {
+  text-decoration: none; color: white;
+
+}
+
+.titlelink:hover{
+  color: #138496;
+}
