@@ -2,28 +2,14 @@
 
 {% block title %}Annuaire Films{% endblock %}
 
-{% block stylesheets %}
-
-<style>
-
-body{
-  background-color: #147589;
-}
-
-
-
-</style>
-
-{% endblock %}
-
 {% block body %}
 
 <div class="container mt-4 mb-1">
   <div class="jumbotron">
-    <h1 class="display-4">{{ movie.name }}!</h1>
+    <h1 class="display-4 title">{{ movie.name }}!</h1>
     <p class="lead">{{ movie.description }}</p>
     <hr class="my-4">
-      De : <span style="font-weight:bold">{{ movie.author.name }}</span>
+      De : <a href="{{ path('author', { id: movie.author.id }) }}" style="font-weight:bold">{{ movie.author.name }}</a>
       <div class="realisateur">
         Du même réalisateur : <br>{% for movieAuthor in movie.author.movies %}
         <span style="font-weight:bold">{{movieAuthor.name}}</span><br>

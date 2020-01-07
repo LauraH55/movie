@@ -10,6 +10,11 @@
 
     }
 
+    .page-header{
+      color: white;
+
+    }
+
     .card-title{
       color: #4C7493;
       font-style: oblique;
@@ -17,7 +22,10 @@
     }
 
     body{
-      background-color: #147589;
+      background-image: url(image/cinema.jpg);
+      background-attachment: fixed;
+      background-size: cover;
+      height: 100%;
     }
 
 
@@ -27,9 +35,13 @@
 
 {% block body %}
 
-<div class="container">
-  <div class="example-wrapper text-center text-light font-italic">
-      <h1>Liste des films </h1>
+<div class="container title pt-3 mb-4">
+  <div class="page-header d-flex">
+    <h1>Ciné Passion</h1>
+    <form class="form-inline my-2 my-lg-0 ml-auto">
+      <input class="form-control mr-sm-2" type="search" placeholder="Rechercher sur le site">
+      <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Rechercher</button>
+    </form>
   </div>
 </div>
 <div class="container">

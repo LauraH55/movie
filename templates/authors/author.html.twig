@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annuaire Films{% endblock %}
+
+{% block stylesheets %}
+
+<style>
+
+.color{
+  color: white;
+}
+</style>
+
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container mt-5 mb-2">
+  <div class="media">
+    <img src="{{author.photo}}" class="align-self-center mr-3" alt="Photo du réalisateur">
+    <div class="media-body mt-5 mb-2 ml-5">
+      <h4 class="title">{{author.name}}</h4>
+      <p class="color"><span style="font-weight:bold">Nationalité : </span>{{author.nationality}}</p>
+      <p class="color"><span style="font-weight:bold">Naissance : </span>{{author.birthday.format('d-m-Y')}}</p>
+      <a class="btn btn-outline-info mb-3 mb-1" href="{{ author.link }}">En savoir plus</a>
+    </div>
+  </div>
+</div>
+<div class="container mt-5 mb-2">
+  <h3 class="title">Biographie : </h3>
+  <p class="color">{{author.biography}}</p>
+</div>
+
+{% endblock %}
