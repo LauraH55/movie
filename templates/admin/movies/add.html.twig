@@ -1,5 +1,18 @@
 {% extends 'admin/base.html.twig' %}
 
+{% block stylesheets %}
+<style >
+
+body{
+  background-image: url('/image/film.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+</style>
+
+{% endblock %}
+
 
 {% block body %}
   <div class="container mt-4">
@@ -7,5 +20,5 @@
     {{form(form)}}
   </div>
 
-  
+
 {% endblock %}
