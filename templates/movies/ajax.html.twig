@@ -1,0 +1,36 @@
+{% if movies %}
+
+  {% for movie in movies %}
+      <div class="card-deck mb-4">
+        <div class="card">
+          <div class="row">
+            <div class="col md-6 text-center mt-5">
+              <img src="{{ movie.cover }}" class="card-img-top" alt="Affiche du film">
+              <div class="date mt-3 mt-1">
+                Date de sortie : <span style="font-weight:bold">{{ movie.date.format('d-m-Y') }}</span>
+              </div>
+              <div class="category">
+                Genres : {% for category in movie.category %}
+                  <span style="font-weight:bold">{{ category.name }}</span>
+                {% endfor %}
+              </div>
+              <div class="reviews mb-3 mb-1">
+                <span style="font-weight:bold">Note :</span> {{ movie.reviews }} / 5
+              </div>
+            </div>
+              <div class="col md-6 d-flex justify-content-center- align-items-center">
+                <div class="card-body">
+                  <h5 class="card-title">{{ movie.name }}</h5>
+                  <p class="card-text">{{ movie.description|slice(0,200) }} ...</p>
+                  <a href="{{ path('movie', { id: movie.id }) }}" class="btn btn-info mb-3 mb-1" type="button" name="button">Lire la suite</a>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+  {% endfor %}
+{% elseif offset == 0 %}
+  <div class="alert alert-warning" role="alert">
+    Désolée, votre recherche n'a pas abouti !
+  </div>
+{% endif %}

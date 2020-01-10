@@ -10,6 +10,8 @@ use App\Entity\Movies;
 
 class MoviesController extends AbstractController
 {
+    const LIMIT = 20;
+
     /**
      * @Route("/movies", name="movies")
      * @param Request $request
@@ -18,23 +20,40 @@ class MoviesController extends AbstractController
     public function index(Request $request)
     {
 
-        $search = (string) $request->query->get('search' , null);
-
-        $movies = $this->getDoctrine()
-        ->getRepository(Movies::class)
-        ->createQueryBuilder('m')
-        ->where('m.name LIKE :name')
-        ->setParameter('name', '%' . $search .'%')
-        ->orderBy('m.name')
-        ->setMaxResults(20)
-        ->getQuery()
-        ->execute();
-
         return $this->render('movies/index.html.twig', [
-            'controller_name' => 'MoviesController',
-            'movies' => $movies
+            'limit' => self::LIMIT,
         ]);
     }
+
+
+    /**
+     * @Route("/movies/ajax", name="movies_ajax")
+     * @param Request $request
+     * @return Response
+     */
+
+     public function moviesAjax(Request $request)
+     {
+       $search = (string) $request->query->get('search' , null);
+       $offset = (int) $request->query->get('offset' , 0);
+
+       $movies = $this->getDoctrine()
+       ->getRepository(Movies::class)
+       ->createQueryBuilder('m')
+       ->where('m.name LIKE :name')
+       ->setParameter('name', '%' . $search .'%')
+       ->orderBy('m.name')
+       ->setMaxResults(self::LIMIT)
+       ->setFirstResult($offset)
+       ->getQuery()
+       ->execute();
+
+       return $this->render('movies/ajax.html.twig', [
+           'movies' => $movies,
+           'offset' => $offset,
+       ]);
+
+     }
 
     /**
      * @Route("/movie/{id}", name="movie")
@@ -51,9 +70,11 @@ class MoviesController extends AbstractController
         return $this->redirectToRoute('movies');
       }
 
-      
+
       return $this->render('movies/movie.html.twig', [
           'movie' => $movie
       ]);
     }
+
+
 }
